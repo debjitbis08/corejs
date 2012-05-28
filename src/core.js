@@ -249,8 +249,6 @@
       });
     });
 
-    start("__notifyDOMEvents__");
-
     return {
       register: register,
       unregister: unregister,
@@ -312,4 +310,6 @@ corejs.register("__notifyDOMEvents__", function (sb) {
     destroy: function () { /*...*/ }
   };
 });
+
+corejs.start("__notifyDOMEvents__");
 
