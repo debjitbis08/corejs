@@ -1,5 +1,12 @@
+/**
+ * CoreJS: A lightweight modular JavaScript framework.
+ *
+ * Copyright (C) Debjit Biswas
+ * Available under the MIT license: http://www.opensource.org/licenses/MIT
+ */
+
 /*jshint browser: true, maxerr: 50, white: true, indent: 2, newcap: true, onevar: true, jquery: true, curly: true, eqeqeq: true, undef: true, strict: false */
-/*global dr: true, jQuery: false, $: false, console: true, window: true, document: true */
+/*global corejs: true, jQuery: false, $: false, console: true, window: true, document: true */
 
 (function () {
 
@@ -252,7 +259,7 @@
     };
   }());
 
-  window.dr = core;
+  window.corejs = core;
 
 }());
 
@@ -269,7 +276,7 @@
  * HTML code. The same widget can be present on a page multiple
  * times.
  */ 
-dr.register("__startWidgets__", function (sb) {
+corejs.register("__startWidgets__", function (sb) {
   return {
     init: function (opts) {
       var i = 0, nwidgets = opts.widgets.length, w;
@@ -292,7 +299,7 @@ dr.register("__startWidgets__", function (sb) {
 /**
  * Module to notify the core of DOM events.
  */
-dr.register("__notifyDOMEvents__", function (sb) {
+corejs.register("__notifyDOMEvents__", function (sb) {
   return {
     init: function (opts) {
       $(document).ready(function () {
@@ -306,42 +313,3 @@ dr.register("__notifyDOMEvents__", function (sb) {
   };
 });
 
-
-/******* Example Module Code *******/
-
-dr.register("tabs", function (sb) {
-  /* Factory function for tabs */
-  var root, changeTab, activeTab;
-
-  changeTab = function (showTab)  {
-    $(root).find('.tab-link-item').removeClass('active');
-    $(root).find('.tab-link-item[href="' + showTab + '"]').addClass('active');
-
-    $(root).find('.tabs-content .content').removeClass('active');
-    $(root).find(showTab).addClass('active');
-
-    activeTab = showTab;
-  };
-
-  return {
-    init: function (opts) {
-      root = opts.el;
-
-      activeTab = $(root).find('.tab-link-item.active').attr('href');
-
-      $(root).find('.tab-links').delegate('.tab-link-item', 'click', function (e) {
-        changeTab($(this).find('a').attr('href'));
-
-        sb.publish("tabChanged", {
-          "activeTab": $(this).find('a').attr('href')
-        });
-      });
-    },
-    destroy: function () {
-      $(root).find('.tab-links').undelegate('.tab-link-item', 'click');
-    }
-  };
-}, {
-  /* Options for tabs */
-  'associatedClass': 'tabs-area'
-});
