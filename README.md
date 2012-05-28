@@ -11,8 +11,10 @@ CoreJS is inspired by:
 
 Please note, presently the internal modules are dependent on jQuery but feel free to modify them based on your preference.
 
+Example Module Code
+-------------------
+
 ```javascript
-/******* Example Module Code *******/
 
 corejs.register("tabs", function (sb) {
   /* Factory function for tabs */
@@ -20,7 +22,7 @@ corejs.register("tabs", function (sb) {
 
   changeTab = function (showTab)  {
     $(root).find('.tab-link-item').removeClass('active');
-    $(root).find('.tab-link-item[href="' + showTab + '"]').addClass('active');
+    $(root).find('a[href="' + showTab + '"]').parent('.tab-link-item').addClass('active');
 
     $(root).find('.tabs-content .content').removeClass('active');
     $(root).find(showTab).addClass('active');
