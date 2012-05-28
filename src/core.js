@@ -78,7 +78,7 @@
     var modules = {},
         instances = {},
         initialModuleList = [],
-        addModule, register, unregister, createInstance, start, top;
+        addModule, register, unregister, createInstance, start, stop;
 
     addModule = function (moduleId, factory, opt) {
       var modObj;
